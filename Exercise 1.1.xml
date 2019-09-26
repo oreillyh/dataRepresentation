@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Books>
 
-<technical_books> 
+<book category="technical_books"> 
 
 	<ISBN>10001001A</ISBN>
 	<Title> Machine Learning</Title>
@@ -11,9 +11,9 @@
 	<Title> AI For Dummies</Title>
 	<Author>John Connor</Author>
 
-</technical_books>
+</book>
 
-<cookery_books>
+<book category ="cookery_books">
 
 	<ISBN>100002001A</ISBN>
 	<Title>1000 Soups of the World</Title>
@@ -23,6 +23,6 @@
 	<Title>A food journey through Norwich</Title>
 	<Author>Delia Smith</Author>
 
-</cookery_books>
+</book>
 
 </Books>
