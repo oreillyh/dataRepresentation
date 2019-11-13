@@ -5,7 +5,7 @@
         src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
     </script>
     <title>
-        read a simple json
+        Lab03
     </title>
 </head>
 
@@ -20,7 +20,10 @@
             "data": "",
             "dataType": "JSON",
             "success": function(result) {
-                console.log(result);
+                var rate = result.bpi.EUR.rate
+                console.log(rate);
+                document.getElementById("Output").innerText = rate;
+                //console.log(JSON.stringify(result));
             },
             "error": function(xhr, status, error) {
                 console.log("error: " + status + " msg:" + error);
