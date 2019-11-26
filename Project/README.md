@@ -25,7 +25,7 @@ ___
 <td>[{...},{...},{...}]</td>  
 </tr>
 <tr>
-td>Find by id</td>
+<td>Find by id</td>
 <td>GET</td>
 <td>/Drug/id</td>
 <td>none</td>
