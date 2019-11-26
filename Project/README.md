@@ -32,11 +32,13 @@ td>Find by id</td>
 <td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
 </td> 
 <td>Create</td>
+<tr>
 <td>POST</td>
 <td>/Drug/id</td>
 <td>{"title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}</td>
 <td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
 </td>
+</tr>
 </tbody>
 </table>
 
