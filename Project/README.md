@@ -31,8 +31,8 @@ td>Find by id</td>
 <td>none</td>
 <td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
 </td> 
-<td>Create</td>
 <tr>
+<td>Create</td>
 <td>POST</td>
 <td>/Drug/id</td>
 <td>{"title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}</td>
