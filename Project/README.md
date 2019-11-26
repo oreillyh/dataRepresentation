@@ -29,7 +29,14 @@ td>Find by id</td>
 <td>GET</td>
 <td>/Drug/id</td>
 <td>none</td>
-<td>[{"id":"1","title":"xxx"},{...},{...}]</td>   
+<td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
+</td> 
+<td>Create</td>
+<td>POST</td>
+<td>/Drug/id</td>
+<td>{"title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}</td>
+<td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
+</td>
 </tbody>
 </table>
 
