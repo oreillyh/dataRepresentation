@@ -18,8 +18,11 @@ ___
 </thead>
 <tbody>
 <tr>
-<td>baz</td>
-<td>bim</td>
+<td>Get All</td>
+<td>GET</td>
+<td>/Drug</td>
+<td>none</td>
+<td>[{...},{...},{...}]</td>  
 </tr>
 </tbody>
 </table>
