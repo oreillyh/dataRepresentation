@@ -24,6 +24,12 @@ ___
 <td>none</td>
 <td>[{...},{...},{...}]</td>  
 </tr>
+<tr>
+td>Find by id</td>
+<td>GET</td>
+<td>/Drug/id</td>
+<td>none</td>
+<td>[{"id":"1","title":"xxx"},{...},{...}]</td>   
 </tbody>
 </table>
 
