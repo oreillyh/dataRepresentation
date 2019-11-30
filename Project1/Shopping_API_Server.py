@@ -1,5 +1,5 @@
 #!flask/bin/python
-from flask import Flask, jsonify,  request, abort, type_response, make_response
+from flask import Flask, jsonify,  request, abort, make_response
 
 app = Flask(__name__,
             static_url_path='', 
@@ -10,83 +10,83 @@ groceries = [
         "id":"1",
         "type":"Fruit",
         "name":"oranges",
-        "quantity":6,
+        "quantity":6
         
     },
     {
         "id":"2",
         "type":"Tins",
         "name":"beans",
-        "quantity":3,
+        "quantity":3
         
     },
     {
         "id":"3",
         "type":"DryGroceries",
         "name":"pasta",
-        "quantity":1,
+        "quantity":1
         
     },
     {
         "id":"4",
         "type":"Sauces",
         "name":"pepper",
-        "quantity":1,
+        "quantity":1
         
     },
     {
         "id":"5",
         "type":"Meat",
         "name":"steak",
-        "quantity":7.45,
+        "quantity":7
         
     },
     {
         "id":"6",
         "type":"Vegetables",
         "name":"onions",
-        "quantity":6,
+        "quantity":6
         
     },
     {
         "id":"7",
         "type":"Meat",
         "name":"chicken",
-        "quantity":7.05,
+        "quantity":7
     },
     {
         "id":"8",
         "type":"Vegetables",
         "name":"potatoes",
-        "quantity":10,
+        "quantity":10
         
     },
     {
         "id":"9",
         "type":"Sauces",
         "name":"carbonara",
-        "quantity":6.82,
-        "Disease":"Oncology"
+        "quantity":6
+        
     },
     {
-         "id":"10",
+        "id":"10",
         "type":"Fruit",
         "name":"apples",
-        "quantity":6,
-    },
+        "quantity":6
+    }
 ]
 
 @app.route('/groceries', methods=['GET'])
-def get_groceries():
-    return jsonify( {'groceries':groceries})
+def get_Groceries():
+    return jsonify( {'grocery':groceries})
 # curl -i http://localhost:5000/groceries/
 
 @app.route('/groceries/<string:id>', methods =['GET'])
-def get_groceries(id):
+def get_Groceries(id):
     foundGroceries = list(filter(lambda t : t['id'] == id , groceries))
     if len(foundGroceries) == 0:
-        return jsonify( { 'groceries' : '' }),204
-    return jsonify( { 'groceries' : foundGroceries[0] })
+        return jsonify( { 'grocerY' : '' }),204
+    return jsonify( { 'grocery' : foundGroceries[0] })
 
 @app.route('/groceries', methods=['POST'])
 def create_groceries():
@@ -101,7 +101,7 @@ def create_groceries():
         "quantity":request.json['quantity']
     }
     groceries.append(groceries)
-    return jsonify( {'groceries':groceries }),201
+    return jsonify( {'grocery':groceries }),201
 
 #curl -i http://localhost:5000/groceries/test
 
@@ -122,7 +122,7 @@ def update_car(id):
     foundGroceries[0]['type']  = request.json.get('type', foundGroceries[0]['type'])
     foundGroceries[0]['name'] =request.json.get('name', foundGroceries[0]['name'])
     foundGroceries[0]['quantity'] =request.json.get('quantity', foundGroceries[0]['quantity'])
-    return jsonify( {'groceries':foundGroceries[0]})
+    return jsonify( {'grocery':foundGroceries[0]})
 
 #curl -i -H "Content-Type:application/json" -X PUT -d "{\"quantity\":\"10\"}" http://localhost:5000/groceries/1
 
