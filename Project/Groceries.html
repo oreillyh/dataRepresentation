@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> View Shopping List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>Groceries</h1>
+    <div> <button id="showCreateButton" onclick="showCreate()">Create</button></div>
+    <div>
+        <table class="table" id="GroceriesTable">
+            <tr>
+                <th>id</th>
+                <th>item</th>
+                <th>name</th>
+                <th>quantity</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+
+        </table>
+    </div>
+    <div id='createUpdateForm' style="display: none">
+        <h2><span id="createLabel">Create a</span> <span id="updateLabel">update</span> Shopping List</h2>
+
+        item <input type="text" name="item" /><br/> name <input type=" text " name="name" /><br/> quantity <input type=" text " name="quantity" /><br/>
+
+        <span><button id="doCreateButton " onclick="doCreate() ">Create</button></span>
+        <span><button id="doUpdateButton " onclick="doUpdate() ">Update</button></span>
+    </div>
+</body>
+<script>
+    function showCreate() {
+        document.getElementById('showCreateButton').style.display = "none "
+        document.getElementById('GroceriesTable').style.display = "none "
+        document.getElementById('createUpdateForm').style.display = "block "
+        document.getElementById('createLabel').style.display = "inline "
+        document.getElementById('updateLabel').style.display = "none "
+        document.getElementById('doCreateButton').style.display = "block "
+        document.getElementById('doUpdateButton').style.display = "none "
+    }
+
+    function showViewAll() {
+        document.getElementById('showCreateButton').style.display = "block "
+        document.getElementById('GroceriesTable').style.display = "block "
+        document.getElementById('createUpdateForm').style.display = "none "
+    }
+
+    function showUpdate(buttonElement) {
+        document.getElementById('showCreateButton').style.display = "none "
+        document.getElementById('GroceriesTable').style.display = "none "
+        document.getElementById('createUpdateForm').style.display = "block "
+        document.getElementById('createLabel').style.display = "none "
+        document.getElementById('updateLabel').style.display = "inline "
+        document.getElementById('doCreateButton').style.display = "none "
+        document.getElementById('doUpdateButton').style.display = "block "
+        var rowElement = buttonElement.parentNode.parentNode
+
+        var groceries = getgroceriesFromRow(rowElement)
+        populateFormWithgroceries(groceries)
+    }
+
+    function doCreate() {
+        var form = document.getElementById('createUpdateForm')
+        var groceries = {}
+        groceries.id = form.querySelector('input[name="id "]').value
+        groceries.item = form.querySelector('select[name="item "]').value
+        groceries.name = form.querySelector('input[name="name "]').value
+        groceries.quantity = form.querySelector('input[name="quantity "]').value
+        console.log(JSON.stringify(groceries))
+        creategroceriesAjax(groceries)
+        addgroceriesToTable(groceries)
+        clearForm()
+
+        showViewAll()
+    }
+
+    function doUpdate() {
+        var groceries = getgroceriesFromForm();
+        var rowElement = document.getElementById(groceries.id);
+        updategroceriesAjax(groceries);
+        setgroceriesInRow(rowElement, groceries);
+
+        clearForm();
+        showViewAll();
+    }
+
+    function doDelete(r) {
+
+        var tableElement = document.getElementById('GroceriesTable');
+        var rowElement = r.parentNode.parentNode;
+        var index = rowElement.rowIndex;
+        deletegroceriesAjax(rowElement.getAttribute("id "));
+        tableElement.deleteRow(index);
+    }
+
+    function addGroceriesToTable(groceries) {
+        var tableElement = document.getElementById('GroceriesTable')
+        var rowElement = tableElement.insertRow(-1)
+        rowElement.setAttribute('id', groceries.id)
+        var cell1 = rowElement.insertCell(0);
+        cell1.innerHTML = groceries.id
+        var cell2 = rowElement.insertCell(1);
+        cell2.innerHTML = groceries.item
+        var cell3 = rowElement.insertCell(2);
+        cell3.innerHTML = groceries.name
+        var cell4 = rowElement.insertCell(3);
+        cell4.innerHTML = groceries.quantity
+        var cell5 = rowElement.insertCell(4);
+        cell5.innerHTML = '<button onclick="showUpdate(this) ">Update</button>'
+        var cell6 = rowElement.insertCell(5);
+        cell6.innerHTML = '<button onclick=doDelete(this)>delete</button>'
+    }
+
+    function clearForm() {
+        var form = document.getElementById('createUpdateForm')
+
+        form.querySelector('select[name="item "]').value = ''
+        form.querySelector('input[name="name "]').value = ''
+        form.querySelector('input[name="quantity "]').value = ''
+    }
+
+    function getGroceriesFromRow(rowElement) {
+        var groceries = {}
+        groceries.id = rowElement.cells[0].firstChild.textContent
+        groceries.item = rowElement.cells[1].firstChild.textContent
+        groceries.name = rowElement.cells[2].firstChild.textContent
+        groceries.quantity = parseInt(rowElement.cells[3].firstChild.textContent, 10)
+        return groceries
+    }
+
+    function setGroceriesrInRow(rowElement, groceries) {
+        rowElement.cells[0].firstChild.textContent = groceries.id
+        rowElement.cells[1].firstChild.textContent = groceries.item
+        rowElement.cells[2].firstChild.textContent = groceries.name
+        rowElement.cells[3].firstChild.textContent = groceries.quantity
+    }
+
+    function populateFormWithGroceries(groceries) {
+        var form = document.getElementById('createUpdateForm')
+        form.querySelector('input[name="id "]').disabled = true
+        form.querySelector('input[name="id "]').value = groceries.id
+        form.querySelector('select[name="item "]').value = groceries.item
+        form.querySelector('input[name="name "]').value = groceries.name
+        form.querySelector('input[name="quantity "]').value = groceries.quantity
+        return groceries
+    }
+
+    function getGroceriesFromForm() {
+        var form = document.getElementById('createUpdateForm')
+        var groceries = {}
+        groceries.id = form.querySelector('input[name="id "]').value
+        groceries.item = form.querySelector('select[name="item "]').value
+        groceries.name = form.querySelector('input[name="name "]').value
+        groceries.quantity = parseInt(form.querySelector('input[name="quantity "]').value, 10)
+        console.log(JSON.stringify(groceries))
+        return groceries
+    }
+
+    function getAllAjax() {
+        $.ajax({
+            "url ": "http://127.0.0.1:5000/groceries ",
+            "method ": "GET ",
+            "data ": " ",
+            "dataType ": "JSON ",
+            "success ": function(result) {
+                console.log(result);
+                for (groceries of result) {
+                    addgroceriesToTable(groceries);
+                }
+
+            },
+            "error ": function(xhr, status, error) {
+                console.log("error: " + status + " msg: " + error);
+            }
+        });
+    }
+
+    function createGroceriesAjax(groceries) {
+
+        console.log(JSON.stringify(groceries));
+        $.ajax({
+            "url ": "http://127.0.0.1:5000/groceries ",
+            "method ": "POST ",
+            "data ": JSON.stringify(groceries),
+            "dataType ": "JSON ",
+            contentType: "application/json; charset=utf-8 ",
+            "success ": function(result) {
+                console.log(result);
+
+            },
+            "error ": function(xhr, status, error) {
+                console.log("error: " + status + " msg: " + error);
+            }
+        });
+    }
+
+    function updateGroceriesAjax(groceries) {
+        //var groceries = {"id ":"11 ","item":"Tins", "name":"corn", "quantity ":8000}
+        console.log(JSON.stringify(groceries));
+        $.ajax({
+            "url ": "http://127.0.0.1:5000/groceries/ " + encodeURI(groceries.id),
+            "method ": "PUT ",
+            "data ": JSON.stringify(groceries),
+            "dataType ": "JSON ",
+            contentType: "application/json; charset=utf-8 ",
+            "success ": function(result) {
+                console.log(result);
+
+            },
+            "error ": function(xhr, status, error) {
+                console.log("error: " + status + " msg: " + error);
+            }
+        });
+    }
+
+    function deleteGroceriesAjax(id) {
+
+        console.log(JSON.stringify(groceries));
+        $.ajax({
+            "url ": "http://127.0.0.1:5000/groceries/ " + encodeURI(id),
+            "method ": "DELETE ",
+            "data ": " ",
+            "dataType ": "JSON ",
+            contentType: "application/json; charset=utf-8 ",
+            "success ": function(result) {
+                console.log(result);
+
+            },
+            "error ": function(xhr, status, error) {
+                console.log("error: " + status + " msg: " + error);
+            }
+        });
+    }
+    getAllAjax();
+</script>
+
+</html>
