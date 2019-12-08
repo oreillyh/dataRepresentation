@@ -1,5 +1,5 @@
 # FLASK RESTful API
-## PHARMACEUTICAL TOP SELLERS
+## SHOPPING LIST
 With CRUD Operations
 
 Hugh O'Reilly
@@ -21,36 +21,36 @@ ___
 <tr>
 <td>Get All</td>
 <td>GET</td>
-<td>/Drug</td>
+<td>/groceries</td>
 <td>none</td>
 <td>[{...},{...},{...}]</td>  
 </tr>
 <tr>
 <td>Find by id</td>
 <td>GET</td>
-<td>/Drug/id</td>
+<td>/groceries/id</td>
 <td>none</td>
-<td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
+<td>[{"id":"1","type":"xxx"},{"name":"xxx","quantity":"xxx"}]
 </td> 
 <tr>
 <td>Create</td>
 <td>POST</td>
-<td>/Drug</td>
-<td>{"title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}</td>
-<td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
+<td>/groceries</td>
+<td>{"type":"xxx"},{"name":"xxx","quantity:"xxx"}</td>
+<td>[{"id":"1","type":"xxx"},{"name":"xxx","quantity":"xxx"}]
 </td>
 </tr>
 <tr>
 <td>Update</td>
 <td>PUT</td>
-<td>/Drug/id</td>
-<td>{"Revenue($B):"xxx"}</td>
-<td>[{"id":"1","title":"xxx"},{"Manufacturer":"xxx","Revenue($B):"xxx"},{"Disease":"xxx"}]
+<td>/groceries/id</td>
+<td>{"quantity:"xxx"}</td>
+<td>[{"id":"1","type":"xxx"},{"name":"xxx","quantity:"xxx"}]
 </td>
 </tr>
 <td>Delete</td>
 <td>DELETE</td>
-<td>/Drug/id</td>
+<td>/groceries/id</td>
 <td>none</td>
 <td>{"done:"true}
 </td>
