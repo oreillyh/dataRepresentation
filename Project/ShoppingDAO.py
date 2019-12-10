@@ -6,8 +6,8 @@ class ShoppingDAO:
     
     host="localhost",
     user="root",
-    password="Fionn1809",
-    database="shopping",
+    password="",
+    database="",
     )
 
   def getAllGroceries(self):

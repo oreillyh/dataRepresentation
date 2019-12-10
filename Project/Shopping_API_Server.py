@@ -13,7 +13,7 @@ CORS (app)
 def get_AllGroceries():
     results = ShoppingDAO.getAllGroceries()
     return jsonify(results)
-# curl -i "http://localhost:5000/groceries/"
+# curl -i "http://127.0.0.1:5000/groceries"
 
 @app.route('/groceries/<string:item>', methods =['GET'])
 def get_groceries(item):
@@ -40,7 +40,8 @@ def create_groceries():
     groceries['id'] = newid
     return jsonify(groceries)
 
-#curl -i "http://localhost:5000/groceries/test"
+
+
 
 @app.route('/groceries/<string:id>', methods =['PUT'])
 def update_groceries(id):
@@ -60,7 +61,7 @@ def update_groceries(id):
     ShoppingDAO.update(values)
     return jsonify(foundGroceries)
 
-#curl -i -H "Content-item:application/json" -X PUT -d "{\"quantity\":\"10\"}" http://localhost:5000/groceries/1
+#curl -i -H "Content-item:application/json" -X PUT -d "{"item\":\Tins\"name\":\"quantity\":\"10\"}" curl -i "http://127.0.0.1:5000/groceries/1"
 
 app.route('/groceries/<string:id>', methods =['DELETE'])
 def delete_groceries(id):
