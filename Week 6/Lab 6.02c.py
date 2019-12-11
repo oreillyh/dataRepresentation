@@ -1,0 +1,5 @@
+response = requests.get(url, auth=('token',apiKey))
+repoJSON = response.json()
+#print (response.json())
+file = open(filename, 'w')
+json.dump(repoJSON, file, indent=4)
