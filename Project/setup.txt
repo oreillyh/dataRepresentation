@@ -70,7 +70,7 @@ python -m virtualenv venv --system-site-packages
 
 --mysql commands--
 show databases;
-create datnbase test;
+create database test;
 use test
 create table test (
     id int NOT NULL AUTO_INCREMENT,
