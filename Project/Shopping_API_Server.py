@@ -1,13 +1,13 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request, abort,  make_response, url_for, render_template, redirect #https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates Render template takes template and returns actual values
-from flask_cors import CORS
+#from flask_cors import CORS
 from ShoppingDAO import ShoppingDAO
 from userinput import userinput
 
 app = Flask(__name__,
             static_url_path='', 
             static_folder='.')
-CORS (app)
+#CORS (app)
 
 @app.route('/')
 def hello_world():

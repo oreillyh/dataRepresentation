@@ -1,4 +1,4 @@
---To create virtual environment:
+venv\Scripts\activate--To create virtual environment:
 
 virtualenv env
 
@@ -60,7 +60,7 @@ python -m virtualenv venv --system-site-packages
 
 --Running Server with Flask instead of Python:
 
-1. set FLASK_APP=a_simpleServer
+1. set FLASK_APP=Shopping_API_Server.py
 
 2. set FLASK_ENV=development
 
